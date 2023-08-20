@@ -5,10 +5,10 @@ def square_matrix_simple(matrix=[]):
 
     rows = len(matrix)
     cols = len(matrix[0])
-    
+
     result_matrix = [[0] * cols for _ in range(rows)]
 
     for i in range(rows):
         result_matrix[i] = list(map(lambda x: x ** 2, matrix[i]))
-    
+
     return result_matrix
