@@ -22,7 +22,16 @@ import sys
 
 
 def is_safe(board, row, col):
-    """Initialize an `n`x`n` sized chessboard with 0's."""
+    """X out spots on a chessboard.
+
+    All spots where non-attacking queens can no
+    longer be played are X-ed out.
+
+    Args:
+        board (list): The current working chessboard.
+        row (int): The row where a queen was last played.
+        col (int): The column where a queen was last played.
+    """
     for i in range(row):
         if board[i] == col or \
            board[i] - i == col - row or \
