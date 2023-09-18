@@ -17,7 +17,7 @@ class Square(Rectangle):
             y (int): y-coordinate of the square (default is 0).
             id (int): Optional id value (default is None).
         """
-        super().__init__(size, size, x, y, id)  # Call superclass constructor with size as width and height
+        super().__init__(size, size, x, y, id)
 
     @property
     def size(self):

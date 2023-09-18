@@ -18,7 +18,7 @@ class Rectangle(Base):
             y (int): y-coordinate of the rectangle (default is 0).
             id (int): Optional id value (default is None).
         """
-        super().__init__(id)  # Call superclass constructor with id
+        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x

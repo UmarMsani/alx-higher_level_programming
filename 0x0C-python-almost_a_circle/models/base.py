@@ -92,13 +92,13 @@ class Base:
             instance: An instance with attributes set.
         """
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)  # Create a dummy Rectangle instance
+            dummy = cls(1, 1)
         elif cls.__name__ == "Square":
-            dummy = cls(1)  # Create a dummy Square instance
+            dummy = cls(1)
         else:
             return None
 
-        dummy.update(**dictionary)  # Apply the real values using update method
+        dummy.update(**dictionary)
         return dummy
 
     @classmethod
