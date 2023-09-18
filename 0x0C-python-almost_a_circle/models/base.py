@@ -213,31 +213,8 @@ class Base:
         Returns:
             None
         """
-        screen = turtle.Screen()
-        screen.setup(width=800, height=600)
-        screen.bgcolor("white")
-
-        t = turtle.Turtle()
-
         for rect in list_rectangles:
-            t.penup()
-            t.goto(rect.x, rect.y)
-            t.pendown()
-            t.forward(rect.width)
-            t.left(90)
-            t.forward(rect.height)
-            t.left(90)
-            t.forward(rect.width)
-            t.left(90)
-            t.forward(rect.height)
-            t.left(90)
+            print("Rectangle: x={}, y={}, width={}, height={}".format(rect.x, rect.y, rect.width, rect.height))
 
         for square in list_squares:
-            t.penup()
-            t.goto(square.x, square.y)
-            t.pendown()
-            for _ in range(4):
-                t.forward(square.size)
-                t.left(90)
-
-        turtle.done()
+            print("Square: x={}, y={}, size={}".format(square.x, square.y, square.size))
