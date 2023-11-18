@@ -2,7 +2,8 @@
 """
 Module: list_states_starting_with_N
 
-This module lists all states with a name starting with 'N' from the database hbtn_0e_0_usa.
+This module lists all states with a name starting
+with 'N' from the database hbtn_0e_0_usa.
 """
 
 import sys
@@ -20,7 +21,13 @@ def list_states_starting_with_N(username, password, db_name):
     """
     try:
         # Establish a connection to the MySQL database
-        db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=db_name)
+        db = MySQLdb.connect(
+                host="localhost",
+                port=3306,
+                user=username,
+                passwd=password,
+                db=db_name
+                )
 
         # Create a cursor object
         cursor = db.cursor()
