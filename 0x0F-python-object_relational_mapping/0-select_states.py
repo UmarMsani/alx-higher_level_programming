@@ -8,6 +8,7 @@ This module lists all states from the database hbtn_0e_0_usa.
 import MySQLdb
 import sys
 
+
 def list_states(username, password, db_name):
     """
     Lists all states from the specified database.
@@ -37,6 +38,7 @@ def list_states(username, password, db_name):
         db.close()
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
