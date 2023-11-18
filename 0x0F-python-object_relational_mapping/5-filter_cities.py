@@ -33,7 +33,7 @@ def cities_by_given_state(username, password, db_name, state_name):
             # Create a cursor object
             cursor = db.cursor()
 
-            # Prepare a parameterized query to safely search for cities of the given state
+            # Prepare parameterized query to search for cities of the state
             query = "SELECT cities.name " \
                     "FROM cities JOIN states ON cities.state_id = states.id " \
                     "WHERE states.name = %s " \
@@ -45,8 +45,10 @@ def cities_by_given_state(username, password, db_name, state_name):
             rows = cursor.fetchall()
 
             # Display results as per requirement (only city names)
-            city_names = [row[0] for row in rows]  # Extract city names from the result
-            print(", ".join(city_names))  # Display city names separated by comma
+            # Extract city names fromresult
+            city_names = [row[0] for row in rows]
+            # Display city names separated by comma
+            print(", ".join(city_names))
 
             # Close cursor and connection
             cursor.close()
@@ -57,7 +59,9 @@ def cities_by_given_state(username, password, db_name, state_name):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: {} username password db_name state_name".format(sys.argv[0]))
+        print("Usage: {} \
+                username password db_name state_name".format(sys.argv[0]))
     else:
-        username, password, db_name, state_name = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+        username, password, db_name, state_name = \
+                sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
         cities_by_given_state(username, password, db_name, state_name)
