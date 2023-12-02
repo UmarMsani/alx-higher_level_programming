@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
 """
-This script fetches the status from 'https://alx-intranet.hbtn.io/status'
-using urllib package and displays the body of the response in a formatted manner.
+This script fetches status from 'https://alx-intranet.hbtn.io/status'
+using urllib package and displays the body of the
+response in a formatted manner.
 """
 
 import urllib.request
@@ -10,7 +11,7 @@ import urllib.request
 
 def fetch_status():
     """
-    Fetches the status from a specified URL and prints the body of the response.
+    Fetches status from specified URL and prints body of the response
     """
     url = 'https://alx-intranet.hbtn.io/status'
 
@@ -24,6 +25,7 @@ def fetch_status():
         print("\t- type: {}".format(type(body)))
         print("\t- content: {}".format(body))
         print("\t- utf8 content: {}".format(utf8_content))
+
 
 if __name__ == "__main__":
     fetch_status()
