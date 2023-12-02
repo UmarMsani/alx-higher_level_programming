@@ -8,6 +8,7 @@ of the X-Request-Id variable found in the header of the response.
 import urllib.request
 import sys
 
+
 def get_x_request_id(url):
     """
     Sends a request to the specified URL and retrieves the value of the X-Request-Id header.
