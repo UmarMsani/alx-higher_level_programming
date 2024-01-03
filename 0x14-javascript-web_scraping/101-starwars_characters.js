@@ -2,36 +2,35 @@
 
 const request = require('request'); // Import the 'request' module
 
-const movieId = process.argv[2]; // Get the movie ID from the command-line arguments
-const baseUrl = 'https://swapi-api.alx-tools.com/api/films/';
-const fullUrl = baseUrl.concat(movieId); // Construct the full URL with the movie ID
+const apiUrl = process.argv[2]; // Get the API URL from the command-line arguments
 
-// Make a GET request to the specified movie URL
-request(fullUrl, (error, response, body) => {
-  if (!error) {
-    const characters = JSON.parse(body).characters; // Parse the response body to access character URLs
-    let charactersProcessed = 0; // Counter to track the number of characters processed
-    const characterNames = []; // Array to store character names
-
-    // Iterate through each character URL
-    characters.forEach((characterUrl) => {
-      // Make a GET request to the character's URL
-      request(characterUrl, (error, response, body) => {
-        if (!error) {
-          const charName = JSON.parse(body).name; // Get the character's name from the response
-          characterNames.push(charName); // Add the character's name to the array
-        }
-        charactersProcessed++;
-
-        // If all characters have been processed, print their names
-        if (charactersProcessed === characters.length) {
-          characterNames.forEach((actor) => {
-            console.log(actor); // Print each character's name
-          });
-        }
-      });
-    });
-  } else {
-    console.log(error); // Log an error if the request encounters an error
+// Make a GET request to the specified API URL
+request(apiUrl, function (error, response, body) {
+  if (error) {
+    console.error(error); // Log an error if the request encounters an error
+    return;
   }
+
+  if (response.statusCode !== 200) {
+    console.error(`Error: Status Code ${response.statusCode}`); // Handle non-200 status codes
+    return;
+  }
+
+  const tasks = JSON.parse(body); // Parse the response body to access task data
+
+  // Object to store the count of completed tasks for each user
+  const completedTasksByUser = {};
+
+  // Loop through each task
+  tasks.forEach((task) => {
+    if (task.completed) {
+      // Increment the completed task count for the respective user
+      completedTasksByUser[task.userId] = (completedTasksByUser[task.userId] || 0) + 1;
+    }
+  });
+
+  // Print users with completed tasks
+  Object.keys(completedTasksByUser).forEach((userId) => {
+    console.log(`User ${userId}: ${completedTasksByUser[userId]} completed tasks`);
+  });
 });
