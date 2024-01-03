@@ -2,21 +2,17 @@
 
 const request = require('request'); // Import the 'request' module
 
-const movieID = process.argv[2]; // Get the movie ID from the command-line arguments
-const url = `https://swapi-api.alx-tools.com/api/films/${movieID}`; // URL with the movie ID
+const episodeNum = process.argv[2]; // Get the movie episode number from the command-line arguments
+const API_URL = 'https://swapi-api.hbtn.io/api/films/'; // Base URL for the Star Wars API
 
-// Make a GET request to the Star Wars API
-request(url, function (error, response, body) {
-  if (error) {
-    console.error(error); // Log an error if request encounters an error
-    return;
+// Make a GET request to the Star Wars API for the specified episode number
+request(API_URL + episodeNum, function (err, response, body) {
+  if (err) {
+    console.log(err); // Log an error if the request encounters an error
+  } else if (response.statusCode === 200) {
+    const responseJSON = JSON.parse(body); // Parse the response body to JSON
+    console.log(responseJSON.title); // Print the title of the movie
+  } else {
+    console.log('Error code: ' + response.statusCode); // Log an error code for non-200 status codes
   }
-
-  if (response.statusCode !== 200) {
-    console.error(`Error: Status Code ${response.statusCode}`); // Handle non-200 status codes
-    return;
-  }
-
-  const movie = JSON.parse(body); // Parse the response body to JSON
-  console.log(`Title: ${movie.title}`); // Print the title of the movie
 });
