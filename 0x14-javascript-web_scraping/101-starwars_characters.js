@@ -2,27 +2,36 @@
 
 const request = require('request'); // Import the 'request' module
 
-const url = 'https://swapi.dev/api/films/' + process.argv[2]; // Construct the URL with the film ID
+const movieId = process.argv[2]; // Get the movie ID from the command-line arguments
+const baseUrl = 'https://swapi-api.alx-tools.com/api/films/';
+const fullUrl = baseUrl.concat(movieId); // Construct the full URL with the movie ID
 
-// Make a GET request to the Star Wars API films endpoint
-request(url, function (error, response, body) {
+// Make a GET request to the specified movie URL
+request(fullUrl, (error, response, body) => {
   if (!error) {
-    let characters = JSON.parse(body).characters; // Parse the response body to access the list of characters
-    printCharacters(characters, 0); // Call the function to print characters recursively starting from index 0
+    const characters = JSON.parse(body).characters; // Parse the response body to access character URLs
+    let charactersProcessed = 0; // Counter to track the number of characters processed
+    const characterNames = []; // Array to store character names
+
+    // Iterate through each character URL
+    characters.forEach((characterUrl) => {
+      // Make a GET request to the character's URL
+      request(characterUrl, (error, response, body) => {
+        if (!error) {
+          const charName = JSON.parse(body).name; // Get the character's name from the response
+          characterNames.push(charName); // Add the character's name to the array
+        }
+        charactersProcessed++;
+
+        // If all characters have been processed, print their names
+        if (charactersProcessed === characters.length) {
+          characterNames.forEach((actor) => {
+            console.log(actor); // Print each character's name
+          });
+        }
+      });
+    });
+  } else {
+    console.log(error); // Log an error if the request encounters an error
   }
 });
-
-// Function to print characters recursively
-function printCharacters(characters, index) {
-  // Make a GET request to the character's endpoint
-  request(characters[index], function (error, response, body) {
-    if (!error) {
-      console.log(JSON.parse(body).name); // Print the name of the character
-
-      // If there are more characters, call the function recursively for the next character
-      if (index + 1 < characters.length) {
-        printCharacters(characters, index + 1);
-      }
-    }
-  });
-}
