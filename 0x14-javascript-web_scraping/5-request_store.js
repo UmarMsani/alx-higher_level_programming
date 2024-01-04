@@ -19,6 +19,5 @@ request(url, { encoding: 'utf-8' }, function (error, response, body) {
       console.error(err); // Log an error if writing to the file encounters an error
       return;
     }
-    console.log(`Content successfully written to ${filePath}`); // Success message
   });
 });
