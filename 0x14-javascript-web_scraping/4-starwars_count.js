@@ -13,7 +13,7 @@ request(apiUrl, function (error, response, body) {
   }
 
   if (response.statusCode !== 200) {
-    console.error(`Error: Status Code ${response.statusCode}`); // Handle non-200 status codes
+    console.error(${response.statusCode}); // Handle non-200 status codes
     return;
   }
 
@@ -22,5 +22,5 @@ request(apiUrl, function (error, response, body) {
     film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}/`)
   ); // Filter movies where Wedge Antilles appears
 
-  console.log(`${moviesWithWedgeAntilles.length}`); // Print the count
+  console.log(${moviesWithWedgeAntilles.length}); // Print the count
 });
