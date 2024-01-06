@@ -22,5 +22,5 @@ request(apiUrl, function (error, response, body) {
     film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}/`)
   ); // Filter movies where Wedge Antilles appears
 
-  console.log(`Number of movies with Wedge Antilles: ${moviesWithWedgeAntilles.length}`); // Print the count
+  console.log(`${moviesWithWedgeAntilles.length}`); // Print the count
 });
